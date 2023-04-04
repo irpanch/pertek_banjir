@@ -1,0 +1,30 @@
+---
+date: "`r Sys.Date()`"
+author: "Irpan Chumaedi"
+title: "Dokumen Pertek"
+output: officedown::rdocx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  # Table captioning
+  tab.cap.style = "Table Caption",
+  tab.cap.pre = "Table",
+  tab.cap.sep=": ",
+  # Figure captioning
+  fig.cap.style = "Image Caption",
+  fig.cap.pre = "Figure",
+  fig.cap.sep=": ",
+)
+
+# Libraries
+
+library(officedown)
+
+
+```
+
+# Test heading 1
+
+Lorem ipsum
