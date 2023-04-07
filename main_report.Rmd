@@ -1,0 +1,67 @@
+---
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+author: "**Irpan Chumaedi**"
+title: "Kajian Banjir Q100"
+output: 
+  officedown::rdocx_document:
+    reference_docx: template.docx
+params:
+  river_location: "Citarum"
+  name_ca: "Citarum"
+  length_river: 550
+  area_ca: 11542
+  client_company: "PT. Wastek International"
+  kecamatan: "Babakan Cikao"
+  kabupaten: "Purwakarta"
+  provinsi: "Jawa Barat"
+  sta_hujan1: "Sta. Hujan Cikao"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  # Table captioning
+  tab.cap.style = "Table Caption",
+  tab.cap.pre = "Table",
+  tab.cap.sep=": ",
+  # Figure captioning
+  fig.cap.style = "Image Caption",
+  fig.cap.pre = "Figure",
+  fig.cap.sep=": "
+)
+
+# Libraries
+
+library(officedown)
+library(officer)
+library(tidyverse)
+library(timetk)
+
+```
+
+# Umum
+
+Salah satu persyaratan yang harus dipenuhi dalam penentuan kelayakan lokasi landfill `r params$client_company` di Kecamatan `r params$kecamatan` Kabupaten `r params$kabupaten`, Provinsi `r params$provinsi` adalah kajian hidrologi tentang analisa bebas banjir. Lokasi landfill terpilih harus mempunyai resiko yang paling minimal terkena dampak akibat banjir, bahkan kalau bisa terbebas dari genangan akibat banjir. Banjir merupakan peristiwa meluapnya air sungai melebihi palung sungai atau genangan air yang terjadi pada daerah yang rendah dan tidak bisa terdrainasikan (SNI 2415:2016, 2016). Kajian mengenai banjir merupakan salah satu bagian yang penting dalam melakukan berbagai analisis, baik analisa untuk infrastruktur, saluran drainase, atau jembatan. Dalam kajian banjir, besarnya (magnitude) debit didefinisikan sebagai kala ulang atau periode ulang. Dimana kala ulang merupakan waktu hipotetik dimana probabilitas kejadian debit atau hujan dengan besaran tertentu akan disamai atau dilampaui sekali dalam jangka waktu tersebut (Permen PUPR Nomor 12/PRT/M/2014, 2014). 
+
+Untuk melakukan kajian bebas banjir ini terdiri dari dua tahapan analisa. Yang pertama adalah analisa hidrologi dimana output dari analisa ini adalah nilai debit banjir pada berbagai kala ulang. Tahapan yang kedua adalah analisa hidrolika dimana nilai debit banjir yang telah dihitung tadi dimodelkan/disimulasikan hingga memperoleh tinggi muka air banjir serta karakteristik hidrolik lainnya seperti kecepatan dan luas genangan.
+
+# Metode Studi
+
+Untuk melakukan kajian bebas banjir ini terdiri dari dua tahapan analisa. Yang pertama adalah analisa hidrologi dimana output dari analisa ini adalah nilai debit banjir pada berbagai kala ulang. Tahapan yang kedua adalah analisa hidrolika dimana nilai debit banjir yang telah dihitung tadi dimodelkan/disimulasikan hingga memperoleh tinggi muka air banjir serta karakteristik hidrolik lainnya. Pada analisa hidrologi dan hidrolika ini data-data yang dikumpulkan adalah sebagai berikut:
+
+1.  Data curah hujan harian `r params$sta_hujan1` selama 20 Tahun terakhir (2002 -- 2022).
+2.  Peta DEM Nasional Resolusi 8.4 x 8.4 meter dari Badan Informasi Geospasial.
+3.  Peta Topografi dan Sungai Skala 1:25.000 dari Badan Informasi Geospasial.
+4.  Peta Lokasi Landfill `r params$client_company`.
+
+# Analisa Hidrologi
+
+## *Catchment Area* (CA)
+
+Untuk dapat menghitung debit banjir, diperlukan 2 (dua) inputan data utama. Input yang pertama adalah karakteristik dari catchment area (CA) yang ditinjau seperti luasan, panjang sungai, dan kemiringan sungai. Kemudian input kedua yang diperlukan adalah curah hujan rencana. Untuk data karakteristik CA diperoleh dari deliniasi peta rupa bumi Indonesia (RBI). Hasil deliniasi menunjukkan terdapat satu CA di sekitar tapak proyek. Dengan luasan `r params$area_ca` Ha.
+
+![Gambar 1. Peta Catchment Area](03_figures/catchment_area.png){#peta_ca width="510"}
+
+## Kondisi Curah Hujan
+
+Data hujan yang digunakan mempunyai panjang waktu pengamatan selama 23 tahun dari tahun 2002 hingga tahun 2021 yang bersumber pada BMKG Stasiun Cikao Purwakarta, berlokasi ±3.4 km ke arah selatan dari lokasi pekerjaan (Gambar 2). Berikut ditampilkan lokasi dan data curah hujan maksimum harian serta jumlah curah hujan bulanan rata-rata berupa tabel dan grafik pada stasiun tersebut.
