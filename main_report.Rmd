@@ -22,12 +22,15 @@ knitr::opts_chunk$set(
   echo = FALSE,
   # Table captioning
   tab.cap.style = "Table Caption",
-  tab.cap.pre = "Table",
+  tab.cap.pre = "Tabel ",
   tab.cap.sep=": ",
   # Figure captioning
   fig.cap.style = "Image Caption",
-  fig.cap.pre = "Figure",
-  fig.cap.sep=": "
+  fig.cap.pre = "Gambar ",
+  fig.cap.sep=": ",
+  fig.align = "center",
+  fig.width = 6,
+  dpi=600
 )
 
 # Libraries
@@ -58,10 +61,20 @@ Untuk melakukan kajian bebas banjir ini terdiri dari dua tahapan analisa. Yang p
 
 ## *Catchment Area* (CA)
 
-Untuk dapat menghitung debit banjir, diperlukan 2 (dua) inputan data utama. Input yang pertama adalah karakteristik dari catchment area (CA) yang ditinjau seperti luasan, panjang sungai, dan kemiringan sungai. Kemudian input kedua yang diperlukan adalah curah hujan rencana. Untuk data karakteristik CA diperoleh dari deliniasi peta rupa bumi Indonesia (RBI). Hasil deliniasi menunjukkan terdapat satu CA di sekitar tapak proyek. Dengan luasan `r params$area_ca` Ha.
+Untuk dapat menghitung debit banjir, diperlukan 2 (dua) inputan data utama. Input yang pertama adalah karakteristik dari catchment area (CA) yang ditinjau seperti luasan, panjang sungai, dan kemiringan sungai. Kemudian input kedua yang diperlukan adalah curah hujan rencana. Untuk data karakteristik CA diperoleh dari deliniasi peta rupa bumi Indonesia (RBI). Hasil deliniasi menunjukkan terdapat satu CA di sekitar tapak proyek (**Gambar** \@ref(fig:peta_ca)) dengan luasan `r params$area_ca` Ha.
 
-![Gambar 1. Peta Catchment Area](03_figures/catchment_area.png){#peta_ca width="510"}
+
+```{r peta_ca, fig.align = 'center', fig.cap = "Peta Catchment Area"}
+knitr::include_graphics(here::here("03_figures", "catchment_area.png"))
+```
+
 
 ## Kondisi Curah Hujan
 
-Data hujan yang digunakan mempunyai panjang waktu pengamatan selama 23 tahun dari tahun 2002 hingga tahun 2021 yang bersumber pada BMKG Stasiun Cikao Purwakarta, berlokasi ±3.4 km ke arah selatan dari lokasi pekerjaan (Gambar 2). Berikut ditampilkan lokasi dan data curah hujan maksimum harian serta jumlah curah hujan bulanan rata-rata berupa tabel dan grafik pada stasiun tersebut.
+Data hujan yang digunakan mempunyai panjang waktu pengamatan selama 23 tahun dari tahun 2002 hingga tahun 2021 yang bersumber pada BMKG Stasiun Cikao Purwakarta, berlokasi ±3.4 km ke arah selatan dari lokasi pekerjaan (**Gambar** \@ref(fig:peta_sta_hjn)). Berikut ditampilkan lokasi dan data curah hujan maksimum harian serta jumlah curah hujan bulanan rata-rata berupa tabel dan grafik pada stasiun tersebut.
+
+```{r peta_sta_hjn, fig.align = 'center', fig.cap = "Lokasi Stasiun Hujan Terhadap Lokasi Proyek"}
+knitr::include_graphics(here::here("03_figures", "lokasi_sta_hujan.png"))
+```
+
+
