@@ -34,11 +34,18 @@ knitr::opts_chunk$set(
 )
 
 # Libraries
-
 library(officedown)
 library(officer)
 library(tidyverse)
 library(timetk)
+library(dplyr)
+library(lubridate)
+
+# Import data
+rainfall_data <- read_csv("01_data/rainfall_data.csv")
+rainfall_data <- rainfall_data %>% 
+  filter(rainfall_mm != "-") %>% #hilangkan data yang kosong
+  mutate(date=mdy(date)) #ganti tipe kolom menjadi tanggal
 
 ```
 
@@ -71,10 +78,43 @@ knitr::include_graphics(here::here("03_figures", "catchment_area.png"))
 
 ## Kondisi Curah Hujan
 
-Data hujan yang digunakan mempunyai panjang waktu pengamatan selama 23 tahun dari tahun 2002 hingga tahun 2021 yang bersumber pada BMKG Stasiun Cikao Purwakarta, berlokasi ±3.4 km ke arah selatan dari lokasi pekerjaan (**Gambar** \@ref(fig:peta_sta_hjn)). Berikut ditampilkan lokasi dan data curah hujan maksimum harian serta jumlah curah hujan bulanan rata-rata berupa tabel dan grafik pada stasiun tersebut.
+Data hujan yang digunakan mempunyai panjang waktu pengamatan selama 23 tahun dari tahun 2002 hingga tahun 2021 yang bersumber pada BMKG Stasiun Cikao Purwakarta, berlokasi ±3.4 km ke arah selatan dari lokasi pekerjaan (**Gambar** \@ref(fig:peta_sta_hjn)). Berikut ditampilkan lokasi dan data curah hujan maksimum harian serta jumlah curah hujan bulanan rata-rata berupa tabel (**Tabel** \@ref(tab:data_hujan)) dan grafik pada stasiun tersebut.
 
 ```{r peta_sta_hjn, fig.align = 'center', fig.cap = "Lokasi Stasiun Hujan Terhadap Lokasi Proyek"}
 knitr::include_graphics(here::here("03_figures", "lokasi_sta_hujan.png"))
 ```
 
+```{r tab.cap="Data Hujan", tab.id="data_hujan", tab.cap.style="Table Caption"}
+#data baris atas data hujan
+head(rainfall_data)
 
+```
+## Analisa Frekuensi
+
+### Distribusi Normal
+
+### Distribusi Log-Normal
+
+### Distribusi Log-Pearson III
+
+### Distribusi Gumbel
+
+### Ringkasan Analisa Desain Curah Hujan
+
+### Penentuan Distribusi Hujan dan Uji Kecocokan
+
+#### Uji Chi-Square
+
+#### Uji Kolmogorov-Smirnov
+
+## Koefisien C
+
+## Analisa Debit Banjir
+
+### Bagan Alir Perhitungan Debit Banjir
+
+### Debit Banjir di Lokasi Proyek
+
+### Debit Banjir di Sungai `r params$river_location`
+
+## Kesimpulan Analisa Hidrologi
