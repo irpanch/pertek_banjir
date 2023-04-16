@@ -9,7 +9,11 @@ params:
   river_location: "Citarum"
   name_ca: "Citarum"
   length_river: 550
+  length_river_proyek: 550
+  slope_river: 0.002
+  slope_river_proyek: 0.0003
   area_ca: 11542
+  area_ca_proyek: 30.5
   client_company: "PT. Wastek International"
   kecamatan: "Babakan Cikao"
   kabupaten: "Purwakarta"
@@ -51,7 +55,7 @@ rainfall_data <- rainfall_data %>%
 
 # Umum
 
-Salah satu persyaratan yang harus dipenuhi dalam penentuan kelayakan lokasi landfill `r params$client_company` di Kecamatan `r params$kecamatan` Kabupaten `r params$kabupaten`, Provinsi `r params$provinsi` adalah kajian hidrologi tentang analisa bebas banjir. Lokasi landfill terpilih harus mempunyai resiko yang paling minimal terkena dampak akibat banjir, bahkan kalau bisa terbebas dari genangan akibat banjir. Banjir merupakan peristiwa meluapnya air sungai melebihi palung sungai atau genangan air yang terjadi pada daerah yang rendah dan tidak bisa terdrainasikan (SNI 2415:2016, 2016). Kajian mengenai banjir merupakan salah satu bagian yang penting dalam melakukan berbagai analisis, baik analisa untuk infrastruktur, saluran drainase, atau jembatan. Dalam kajian banjir, besarnya (magnitude) debit didefinisikan sebagai kala ulang atau periode ulang. Dimana kala ulang merupakan waktu hipotetik dimana probabilitas kejadian debit atau hujan dengan besaran tertentu akan disamai atau dilampaui sekali dalam jangka waktu tersebut (Permen PUPR Nomor 12/PRT/M/2014, 2014). 
+Salah satu persyaratan yang harus dipenuhi dalam penentuan kelayakan lokasi landfill `r params$client_company` di Kecamatan `r params$kecamatan` Kabupaten `r params$kabupaten`, Provinsi `r params$provinsi` adalah kajian hidrologi tentang analisa bebas banjir. Lokasi landfill terpilih harus mempunyai resiko yang paling minimal terkena dampak akibat banjir, bahkan kalau bisa terbebas dari genangan akibat banjir. Banjir merupakan peristiwa meluapnya air sungai melebihi palung sungai atau genangan air yang terjadi pada daerah yang rendah dan tidak bisa terdrainasikan (SNI 2415:2016, 2016). Kajian mengenai banjir merupakan salah satu bagian yang penting dalam melakukan berbagai analisis, baik analisa untuk infrastruktur, saluran drainase, atau jembatan. Dalam kajian banjir, besarnya (magnitude) debit didefinisikan sebagai kala ulang atau periode ulang. Dimana kala ulang merupakan waktu hipotetik dimana probabilitas kejadian debit atau hujan dengan besaran tertentu akan disamai atau dilampaui sekali dalam jangka waktu tersebut (Permen PUPR Nomor 12/PRT/M/2014, 2014).
 
 Untuk melakukan kajian bebas banjir ini terdiri dari dua tahapan analisa. Yang pertama adalah analisa hidrologi dimana output dari analisa ini adalah nilai debit banjir pada berbagai kala ulang. Tahapan yang kedua adalah analisa hidrolika dimana nilai debit banjir yang telah dihitung tadi dimodelkan/disimulasikan hingga memperoleh tinggi muka air banjir serta karakteristik hidrolik lainnya seperti kecepatan dan luas genangan.
 
@@ -70,11 +74,9 @@ Untuk melakukan kajian bebas banjir ini terdiri dari dua tahapan analisa. Yang p
 
 Untuk dapat menghitung debit banjir, diperlukan 2 (dua) inputan data utama. Input yang pertama adalah karakteristik dari catchment area (CA) yang ditinjau seperti luasan, panjang sungai, dan kemiringan sungai. Kemudian input kedua yang diperlukan adalah curah hujan rencana. Untuk data karakteristik CA diperoleh dari deliniasi peta rupa bumi Indonesia (RBI). Hasil deliniasi menunjukkan terdapat satu CA di sekitar tapak proyek (**Gambar** \@ref(fig:peta_ca)) dengan luasan `r params$area_ca` Ha.
 
-
 ```{r peta_ca, fig.align = 'center', fig.cap = "Peta Catchment Area"}
 knitr::include_graphics(here::here("03_figures", "catchment_area.png"))
 ```
-
 
 ## Kondisi Curah Hujan
 
@@ -89,32 +91,68 @@ knitr::include_graphics(here::here("03_figures", "lokasi_sta_hujan.png"))
 head(rainfall_data)
 
 ```
+
 ## Analisa Frekuensi
+
+Analisa curah hujan maksimum rencana di Lokasi pekerjaan dilakukan dengan metoda statistik. Sebararan teoritis yang digunakan dalam analisis frekuensi dari berbagai distribusi, yaitu sebaran teoritis distribusi Normal, Log-Normal 2 parameter, Log-Pearson tipe III, dan Gumbel. Berikut ini diuraikan formula untuk menentukan kedalaman hujan periode ulang tertentu untuk setiap distribusi frekuensi hujan.
 
 ### Distribusi Normal
 
+Distribusi normal adalah simetris terhadap sumbu vertikal dan berbentuk lonceng yang juga disebut distribusi *Gauss*. Distribusi normal mempunyai dua parameter yaitu rata-rata µ dan deviasi standar $\sigma$ dari populasi. Dalam praktek, nilai rata-rata $\overline{x}$ dan deviasi standar s diturunkan dari data sampel untuk menggantikan µ dan $\sigma$ . Persamaan distribusi normal adalah sebagai berikut:
+
 ### Distribusi Log-Normal
+
+Untuk frekuensi hujan yang mengikuti distribusi Log-normal, kedalaman hujan periode ulang T dapat ditentukan sebagai berikut:
 
 ### Distribusi Log-Pearson III
 
+Jika distribusi frekuensi hujan mengikuti distribusi Log-Pearson Tipe III, maka kedalaman hujan periode ulang T dapat ditentukan sebagai berikut:
+
 ### Distribusi Gumbel
+
+Jika distribusi frekuensi hujan mengikuti distribusi Gumbel, maka kedalaman hujan periode ulang T dapat ditentukan sebagai berikut:
 
 ### Ringkasan Analisa Desain Curah Hujan
 
+Rekapitulasi Hasil perhitungan distribusi curah hujan rencana untuk perioda ulang 1.5, 2, 5, 10, 25, 50, 100, 200 dan 1000 tahun dengan berbagai metode dapat dilihat pada Tabel dan Gambar Berikut.
+
 ### Penentuan Distribusi Hujan dan Uji Kecocokan
+
+Selanjutnya setelah dilakukan analisa frekuensi dilakukan uji kesesuaian distribusi yang dimaksudkan untuk mengetahui kebenaran analisa curah hujan baik terhadap simpangan data vertikal ataupun simpangan data horisontal. Uji kesesuaian distribusi frekuensi digunakan untuk menguji apakah pemilihan distribusi yang digunakan dalam perhitungan curah hujan rencana diterima atau ditolak, maka perlu dilakukan uji kesesuaian distribusi baik secara statistik maupun simpangan terkecil. Untuk uji simpangan digunakan metode Chi Square dan metode Smirnov Kolmogorof.
 
 #### Uji Chi-Square
 
+Uji chi-squre hanya efektif bila jumlah data pengamatan besar, karena sebelum dilakukan pengujian data pengamatan harus dikelompokkan terlebih dahulu. Pengelompokan ini akan mengakibatkan akurasi hasilnya berkurang. Kottegoda (1996) menyarankan sebaiknya n ≥ 50 dan jumlah kelas interval ≥ 5.\
+Perhitungannya dengan menggunakan persamaan (Shahin, 1976: 186)
+
 #### Uji Kolmogorov-Smirnov
 
+Untuk menghindarkan hilangnya informasi data pada chi square akibat pengelompokan data dalam kelas-kelas interval, ada beberapa metode lain yang telah dikembangkan. Salah satunya uji Kolmogorv-Smirnov (1993). Uji ini disebut "non parametric" karena tidak mengikuti distribusi tertentu. Uji ini digunakan untuk menguji simpangan secara vertikal, yaitu merupakan selisih/simpangan maksimum antara distribusi teoritis dan empiris (maks). Dalam bentuk persamaan dapat ditulis:
+
 ## Koefisien C
+
+Hasil dari curah hujan rencana masih merupakan hujan total, sedangkan untuk menghitung debit banjir diperlukan nilai hujan efektif, artinya sudah dikurangi dengan infiltrasi lahan yang ada. Berbagai macam cara untuk menghitung hujan efektif, pada pekerjaan ini metode yang digunakan adalah metode Koefisien C atau koefisien limpasan.
 
 ## Analisa Debit Banjir
 
 ### Bagan Alir Perhitungan Debit Banjir
 
+Berdasarkan SNI 2415-2016 tentang "Tata Cara Perhitungan Debit Banjir Rencana", bagan alir perhitungan banjir dapat dilihat pada (**Gambar** \@ref(fig:bagan_alir_SNI)) yang memperlihatkan prosedur umum yang diperlukan untuk menghitung debit banjir berdasarkan ketersediaan data di lapangan.
+
+```{r bagan_alir_SNI, fig.align = 'center', fig.cap = "Bagan Alir Perhitungan Debit Rencana "}
+knitr::include_graphics(here::here("03_figures", "bagan_alir_banjir.png"))
+```
+
+Karena ketersediaan data dengan rentang panjang yang berada di lokasi hanyalah data hujan maksimum harian selama `20 tahun serta luasan CA yang kurang dari 50 Km2`, maka prosedur yang dilakukan berdasarkan bagan alir diatas adalah: `pengumpulan data hujan harian maksimum tiap tahun pencatatan, analisa frekuensi, intensitas hujan, analisa rasional, dan terakhir memperoleh debit banjir rencana`.
+
 ### Debit Banjir di Lokasi Proyek
+
+Perhitungan debit banjir di lokasi proyek menggunakan metode rasional. Metode ini dapat menggambarkan hubungan antara debit limpasan dengan curah hujan secara praktis berlaku untuk luas CA hingga 5000 hektar atau 50 Km^2^ (SNI 2415:2016). Persamaan untuk menghitung metode rasional praktis adalah sebagai berikut:
 
 ### Debit Banjir di Sungai `r params$river_location`
 
+Sungai besar yang terdekat dari lokasi pekerjaan adalah Sungai `r params$river_location` yang berjarak `±1.7` Km ke arah barat dari lokasi tapak proyek (`Gambar 9`). Untuk mengetahui pengaruh Sungai Citarum terhadap lokasi proyek maka perlu dihitung juga besaran debit Q100 `r params$river_location` yang nantinya menjadi input model hidrolika sehingga diketahui seberapa luas pengaruh banjir yang terjadi disertai elevasi tinggi muka air banjirnya.
+
 ## Kesimpulan Analisa Hidrologi
+
+Berdasarkan dari proses deliniasi, catchment area (CA) yang berada di sektar lokasi mempunyai luasan `r params$area_ca_proyek` Ha, panjang sungai `r params$length_river_proyek` meter dengan kemiringan `r sprintf(params$slope_river_proyek, fmt = '%#.5f')`. Terdapat satu pos hujan (`r params$sta_hujan1` ) yang mewakili dari CA tersebut dengan panjang pengamatan 23 tahun dari tahun 2000 hingga tahun 2022. Hasil dari analisa frekuensi curah hujan diperoleh curah hujan rencana 50 tahunan sebesar `161.9` mm serta untuk curah hujan rencana 100 tahunan sebesar `169.1` mm. Berikutnya dilakukan analisa debit banjir dengan metode rasional yang hasilnya diperoleh untuk nilai Q50 adalah `4.041 m3/dtk dan Q100 adalah 4.220 m3/dtk`. Untuk debit banjir Q100 Sungai `r params$river_location` di dekat lokasi proyek adalah `2816` m3/dtk.
