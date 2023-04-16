@@ -12,3 +12,11 @@ rainfall_data <- rainfall_data %>%
 
 View(rainfall_data)
 
+# coba package fasstr
+library(fasstr)
+rename(rainfall_data,c("Date" = "date", "Value" = "rainfall_mm" ))
+rainfall_data$rainfall_mm <- as.numeric(rainfall_data$rainfall_mm)
+
+
+
+calc_longterm_daily_stats(rainfall_data)
