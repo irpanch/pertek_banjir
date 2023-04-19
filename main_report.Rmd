@@ -53,6 +53,38 @@ rainfall_data <- rainfall_data %>%
 
 ```
 
+
+\newpage
+
+# *Executive Summary* {.unnumbered}
+
+Sesuai dengan peraturan `xxx` ntuk bisa memenuhi persyaratan kelayakan landfill, diperlukan kajian banjir.
+
+\newpage
+
+# Daftar Isi
+
+```{r}
+block_toc()
+```
+
+\newpage
+
+```{r}
+block_toc(style = "Image Caption")
+```
+\listoffigures
+
+\newpage
+
+```{r}
+block_toc(style = "Table Caption")
+```
+\listoftables
+
+
+\newpage
+
 # Umum
 
 Salah satu persyaratan yang harus dipenuhi dalam penentuan kelayakan lokasi landfill `r params$client_company` di Kecamatan `r params$kecamatan` Kabupaten `r params$kabupaten`, Provinsi `r params$provinsi` adalah kajian hidrologi tentang analisa bebas banjir. Lokasi landfill terpilih harus mempunyai resiko yang paling minimal terkena dampak akibat banjir, bahkan kalau bisa terbebas dari genangan akibat banjir. Banjir merupakan peristiwa meluapnya air sungai melebihi palung sungai atau genangan air yang terjadi pada daerah yang rendah dan tidak bisa terdrainasikan (SNI 2415:2016, 2016). Kajian mengenai banjir merupakan salah satu bagian yang penting dalam melakukan berbagai analisis, baik analisa untuk infrastruktur, saluran drainase, atau jembatan. Dalam kajian banjir, besarnya (magnitude) debit didefinisikan sebagai kala ulang atau periode ulang. Dimana kala ulang merupakan waktu hipotetik dimana probabilitas kejadian debit atau hujan dengan besaran tertentu akan disamai atau dilampaui sekali dalam jangka waktu tersebut (Permen PUPR Nomor 12/PRT/M/2014, 2014).
