@@ -73,14 +73,14 @@ block_toc()
 ```{r}
 block_toc(style = "Image Caption")
 ```
-\listoffigures
+
 
 \newpage
 
 ```{r}
 block_toc(style = "Table Caption")
 ```
-\listoftables
+
 
 
 \newpage
