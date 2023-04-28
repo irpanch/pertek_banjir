@@ -8,9 +8,16 @@ library(lubridate)
 
 rainfall_data <- rainfall_data %>% 
   filter(rainfall_mm != "-") %>% #hilangkan data yang kosong
-  mutate(date=mdy(date)) #ganti tipe kolom menjadi tanggal
+  mutate(rainfall_mm=as.numeric(rainfall_mm))# %>% 
+  #mutate(date=mdy(date)) #ganti tipe kolom menjadi tanggal
 
 View(rainfall_data)
+
+sapply(rainfall_data, class) # cek tipe class
+
+rainfall_data <- type.convert(rainfall_data,as.is=T) # convert data sesuai isi
+
+rainfall_data$date <- mdy(rainfall_data$date) #convert tipe kolom menjadi tanggal
 
 # coba package fasstr
 library(fasstr)
@@ -52,3 +59,16 @@ plot_daily_stats(station_number = "08NM116",
 plot_daily_stats(station_number = "08NM116", 
                  start_year = 1974,
                  add_year = 2000)
+
+# coba ganti dengan stasiun yang lain
+
+calc_longterm_daily_stats(data = rainfall_data,
+                          dates = date,
+                          values = rainfall_mm,
+                          groups = station)
+plot_daily_stats(data = rainfall_data,
+                 dates = date,
+                 values = rainfall_mm,
+                 groups = station)
+
+# kesimpulan: fasstr hanya bisa dipakai untuk debit, kalau hujan jadi kacau.
