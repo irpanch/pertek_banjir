@@ -9,7 +9,7 @@ library(lubridate)
 rainfall_data <- rainfall_data %>% 
   filter(rainfall_mm != "-") %>% #hilangkan data yang kosong
   mutate(rainfall_mm=as.numeric(rainfall_mm))# %>% 
-  #mutate(date=mdy(date)) #ganti tipe kolom menjadi tanggal
+#mutate(date=mdy(date)) #ganti tipe kolom menjadi tanggal
 
 View(rainfall_data)
 
@@ -23,7 +23,6 @@ rainfall_data$date <- mdy(rainfall_data$date) #convert tipe kolom menjadi tangga
 library(fasstr)
 
 tidyhydat::hy_version()
-<<<<<<< HEAD
 
 calc_longterm_daily_stats(data = flow_data)
 
@@ -47,9 +46,9 @@ plot_longterm_daily_stats(station_number = "08NM116",
                           outer_percentiles = c(10,90)) 
 
 plot_longterm_monthly_stats(station_number = "08NM116", 
-                          start_year = 1974,
-                          inner_percentiles = c(25,75),
-                          outer_percentiles = c(10,90)) 
+                            start_year = 1974,
+                            inner_percentiles = c(25,75),
+                            outer_percentiles = c(10,90)) 
 
 plot_monthly_stats(station_number = "08NM116", 
                    start_year = 1974)[1]
@@ -73,37 +72,3 @@ plot_daily_stats(data = rainfall_data,
                  groups = station)
 
 # kesimpulan: fasstr hanya bisa dipakai untuk debit, kalau hujan jadi kacau.
-=======
-
-calc_longterm_daily_stats(data = flow_data)
-
-plot_flow_data(station_number = "08NM116")
-
-calc_longterm_daily_stats(station_number = "08NM116")
-calc_longterm_daily_stats(station_number = c("08NM116", "08NM242"))
-
-plot_flow_data(station_number = c("08NM241", "08NM242"),
-               one_plot = TRUE) 
-
-screen_flow_data(station_number = "08NM116")
-
-plot_data_screening(station_number = "08NM116")
-
-plot_missing_dates(station_number = "08NM116")
-
-plot_longterm_daily_stats(station_number = "08NM116", 
-                          start_year = 1974,
-                          inner_percentiles = c(25,75),
-                          outer_percentiles = c(10,90)) 
-
-plot_longterm_monthly_stats(station_number = "08NM116", 
-                          start_year = 1974,
-                          inner_percentiles = c(25,75),
-                          outer_percentiles = c(10,90)) 
-
-plot_monthly_stats(station_number = "08NM116", 
-                   start_year = 1974)[1]
-
-plot_daily_stats(station_number = "08NM116", 
-                 start_year = 1974) 
->>>>>>> 2fa354e91b7fede4a6dd798e4d899285082dddbe
