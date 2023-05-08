@@ -2,6 +2,7 @@
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 author: "**Irpan Chumaedi**"
 title: "Kajian Banjir Q100"
+subtitle: "`r params$client_company`, `r params$kecamatan`, `r params$kabupaten`"
 output: 
   officedown::rdocx_document:
     reference_docx: template.docx
